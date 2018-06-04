@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="AcNmb.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcNmb"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:conv="using:AcNmb.Core.Utils.Converters">
+
+    <Page.Resources>
+        <conv:ThreadNumberConverter x:Name="ThreadNumberConverter" />
+        <conv:ContentConverter x:Name="ContentConverter" />
+        <conv:ImageVisibilityConverter x:Name="ImageVisibilityConverter" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="480" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListView x:Name="ForumList" Grid.Row="0" Grid.Column="0"  SelectionChanged="ForumSelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10">
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="PostList" Grid.Row="0" Grid.Column="1"  SelectionChanged="PostSelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5, 20, 5, 20">
+                        <Grid Margin="0, 0, 5, 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding UserId}" Grid.Row="0" Grid.Column="0" FontSize="12" />
+                            <TextBlock Text="{Binding Id, Converter={StaticResource ThreadNumberConverter}}" Grid.Row="0" Grid.Column="1" FontSize="12" />
+                            <TextBlock Text="{Binding Now}" Grid.Row="0" Grid.Column="2" FontSize="12" TextAlignment="Right" />
+                        </Grid>
+                        <!--<TextBlock Text="{Binding Name}" />-->
+                        <TextBlock Text="{Binding Content, Converter={StaticResource ContentConverter}}" TextWrapping="Wrap" />
+                        <Image x:Name="ImagePath" Visibility="{Binding Img.Length, Converter={StaticResource ImageVisibilityConverter}}" Source="{Binding ImagePath}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="PostAndReplyList" Grid.Row="0" Grid.Column="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="20">
+                        <Grid Margin="0, 0, 0, 10" Width="480" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding UserId}" Grid.Row="0" Grid.Column="0" FontSize="12" />
+                            <TextBlock Text="{Binding Id, Converter={StaticResource ThreadNumberConverter}}" Grid.Row="0" Grid.Column="1" FontSize="12" />
+                            <TextBlock Text="{Binding Now}" Grid.Row="0" Grid.Column="2" FontSize="12" TextAlignment="Right" />
+                        </Grid>
+                        <!--<TextBlock Text="{Binding Name}" />-->
+                        <TextBlock Text="{Binding Content, Converter={StaticResource ContentConverter}}" TextWrapping="Wrap" />
+                        <Image x:Name="ImagePath" Visibility="{Binding Img.Length, Converter={StaticResource ImageVisibilityConverter}}" Source="{Binding ImagePath}" Width="480"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
