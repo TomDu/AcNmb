@@ -9,12 +9,12 @@ namespace AcNmb.Core.Utils
     public class UrlUtil
     {
         public const string AppId = "nimingban";
-        public const string Host = "https://h.nimingban.com";
+        public const string Host = "http://adnmb1.com";
         public const string ServiceRoot = Host + "/Api";
         public const string PostList = ServiceRoot + "/showf?appid=" + AppId;
         public const string Post = ServiceRoot + "/thread?appid=" + AppId;
 
-        public const string ImagePathPrefix = "http://img1.nimingban.com/image/";
+        public const string ImagePathPrefix = "http://img1.adnmb1.com/image/";
 
         public static string GetPostListUrl(string forum, int page)
         {
